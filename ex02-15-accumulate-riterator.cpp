@@ -1,0 +1,45 @@
+#include<iostream>
+#include<vector>
+#include<cstring>
+#include<cassert>
+#include<algorithm>
+#include<numeric>
+
+using namespace std;
+
+
+int main()
+{
+	cout << "Demonstrating generic accumulate algorithm with  "
+	     << "a reverse iterator"	
+	     << endl;
+	
+	float small = (float) 1.0/ (1 << 26);
+	float x[5] = {1.0, 3*small, 2*small, small, small};
+	//float x[5] = {1.0, 2.0, 3.0, 4.0, 5.0};
+
+	//Initialize vector to x[0] through  x[4]
+	vector<float> vector1(&x[0], &x[5]);
+
+	cout << "values to be added: " << endl;
+
+	vector<float>::iterator i;
+
+	cout.precision(10);
+	for(i = vector1.begin(); i != vector1.end(); i++)
+	{
+		cout << *i << endl;		
+	}
+	cout << endl;		
+
+	float sum = accumulate(vector1.begin(), vector1.end(), (float)0.0);
+	
+	cout << "Sum accumulated from left = " << sum << endl;
+
+	float sum1 = accumulate(vector1.rbegin(), vector1.rend(), (float)0.0);
+	cout << "Sum accumulated from right = " << sum1 << endl;
+	
+	
+
+	return 0;
+}
